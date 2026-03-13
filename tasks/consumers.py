@@ -81,6 +81,8 @@ class BoardConsumer(AsyncWebsocketConsumer):
 
     async def user_left(self, event):
         await self._send_if_not_sender(event)
+    async def notification_event(self, event):
+        await self._send_if_not_sender(event)
 
     async def _send_if_not_sender(self, event):
         if event.get('sender_channel') != self.channel_name:
