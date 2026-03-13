@@ -346,7 +346,7 @@ Click the link below to get started:
 
 
 class TestEmailView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]  # no auth needed
 
     def get(self, request):
         try:
@@ -354,9 +354,10 @@ class TestEmailView(APIView):
                 subject='SyncSpace Test',
                 message='Email is working!',
                 from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[request.user.email],
+                recipient_list=['johncarlovid@gmail.com'],
                 fail_silently=False,
             )
-            return Response({'ok': True, 'sent_to': request.user.email})
+            return Response({'ok': True})
         except Exception as e:
             return Response({'error': str(e)}, status=500)
+ 
