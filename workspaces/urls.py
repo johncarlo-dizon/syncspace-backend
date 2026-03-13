@@ -9,6 +9,7 @@ from .views import (
     UpdateMemberRoleView,
     AcceptInviteView,
     GetInviteInfoView,
+    TestEmailView,
 )
 
 urlpatterns = [
@@ -21,4 +22,5 @@ urlpatterns = [
     path('<uuid:pk>/invite-link/', GenerateInviteLinkView.as_view()),
     path('invite/<uuid:token>/info/', GetInviteInfoView.as_view()),
     path('invite/<uuid:token>/accept/', AcceptInviteView.as_view()),
+    path('test-email/', TestEmailView.as_view()),
 ]

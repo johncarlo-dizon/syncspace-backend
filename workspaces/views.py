@@ -343,3 +343,20 @@ Click the link below to get started:
         )
     except Exception:
         pass  # Never crash the API because of email failure
+
+
+class TestEmailView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        try:
+            send_mail(
+                subject='SyncSpace Test',
+                message='Email is working!',
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[request.user.email],
+                fail_silently=False,
+            )
+            return Response({'ok': True, 'sent_to': request.user.email})
+        except Exception as e:
+            return Response({'error': str(e)}, status=500)
